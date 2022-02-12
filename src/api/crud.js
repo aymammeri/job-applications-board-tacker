@@ -11,76 +11,76 @@ export const getBoard = (user) => {
   })
 }
 
-export const getColumn = (user, data) => {
+export const getColumn = (data) => {
   return axios({
     method: 'GET',
     url: apiUrl + '/column/' + data.id,
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     }
   })
 }
 
-export const createColumn = (user, data) => {
+export const createColumn = (data) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/column/',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     },
     data
   })
 }
 
-export const createCell = (user, data) => {
+export const createCell = (data) => {
   return axios({
     url: apiUrl + '/cell/',
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     },
     data
   })
 }
 
-export const editColumn = (user, data) => {
+export const editColumn = (data) => {
   return axios({
     url: apiUrl + '/column/' + data.id,
     method: 'PATCH',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     },
     data
   })
 }
 
-export const editCell = (user, data) => {
+export const editCell = (data) => {
   return axios({
     url: apiUrl + '/cell/' + data.id,
     method: 'PATCH',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     },
     data
   })
 }
 
-export const deleteColumn = (user, data) => {
+export const deleteColumn = (data) => {
   return axios({
     url: apiUrl + '/column/' + data.id,
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     }
   })
 }
 
-export const deleteCell = (user, data) => {
+export const deleteCell = (data) => {
   return axios({
     url: apiUrl + '/cell/' + data.id,
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${data.token}`
     }
   })
 }
