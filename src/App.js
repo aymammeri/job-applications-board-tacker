@@ -11,29 +11,39 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Board from './components/Board/Board'
+import NewModal from './components/Modal/Modal'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+      board: null,
+      modalShow: false,
+      modalType: null,
+      modalProps: null
     }
   }
 
-  setUser = (user) => this.setState({ user })
-
+  setUser = user => this.setState({ user })
+  setBoard = board => this.setState({ board })
+  setModalType = str => this.setState({ modalType: str })
+  setModalProps = parentId => this.setState({ modalProps: parentId })
   clearUser = () => this.setState({ user: null })
 
-  deleteAlert = (id) => {
-    this.setState((state) => {
-      return { msgAlerts: state.msgAlerts.filter((msg) => msg.id !== id) }
+  handleShow = () => this.setState({ modalShow: true })
+  handleClose = () => this.setState({ modalShow: false })
+
+  deleteAlert = id => {
+    this.setState(state => {
+      return { msgAlerts: state.msgAlerts.filter(msg => msg.id !== id) }
     })
   }
 
   msgAlert = ({ heading, message, variant }) => {
     const id = uuid()
-    this.setState((state) => {
+    this.setState(state => {
       return {
         msgAlerts: [...state.msgAlerts, { heading, message, variant, id }]
       }
@@ -41,12 +51,12 @@ class App extends Component {
   }
 
   render () {
-    const { msgAlerts, user } = this.state
+    const { msgAlerts, user, board } = this.state
 
     return (
       <Fragment>
-	      <Header user={user} />
-	      {msgAlerts.map((msgAlert) => (
+        <Header user={user} />
+        {msgAlerts.map(msgAlert => (
           <AutoDismissAlert
             key={msgAlert.id}
             heading={msgAlert.heading}
@@ -56,8 +66,8 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
-	      <main className='container'>
-	        <Route
+        <main className='container'>
+          <Route
             path='/sign-up'
             render={() => (
               <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
@@ -66,7 +76,11 @@ class App extends Component {
           <Route
             path='/sign-in'
             render={() => (
-              <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+              <SignIn
+                msgAlert={this.msgAlert}
+                setUser={this.setUser}
+                setBoard={this.setBoard}
+              />
             )}
           />
           <AuthenticatedRoute
@@ -89,12 +103,21 @@ class App extends Component {
           />
           <AuthenticatedRoute
             user={user}
-            exact path='/'
+            exact
+            path='/'
             render={() => (
-              <Board msgAlert={this.msgAlert} user={user} />
+              <Board
+                msgAlert={this.msgAlert}
+                user={user}
+                board={board}
+                setModalType={this.setModalType}
+                setModalProps={this.setModalProps}
+                handleShow={this.handleShow}
+              />
             )}
           />
         </main>
+        <NewModal modalType={this.state.modalType} modalProps={this.state.modalProps} show={this.state.modalShow} handleClose={this.handleClose} />
       </Fragment>
     )
   }
