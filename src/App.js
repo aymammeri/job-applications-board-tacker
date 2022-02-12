@@ -10,6 +10,7 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
+import Board from './components/Board/Board'
 
 class App extends Component {
   constructor (props) {
@@ -84,6 +85,13 @@ class App extends Component {
             path='/change-password'
             render={() => (
               <ChangePassword msgAlert={this.msgAlert} user={user} />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            exact path='/'
+            render={() => (
+              <Board msgAlert={this.msgAlert} user={user} />
             )}
           />
         </main>
