@@ -1,45 +1,88 @@
+/* eslint-disable indent */
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 
 import ModalBodyCreateEditColumn from './Modal-Body-Column-EditCreate'
 import ModalBodyCreateEditCell from './Modal-Body-Cell-EditCreate'
 import ModalBodyDelete from './Modal-Body-Delete'
+import { getBoard } from '../../api/crud'
 
 const NewModal = props => {
-  const modalType = props.modalType
-  let [modalTitle, modalBody, buttonText, danger] = []
+  // eslint-disable-next-line no-unused-vars
+  const { modalType, elementId, apiCall, user, setBoard } = props
+  let [modalTitle, modalBody, apiData, buttonText, danger] = []
 
-  if (modalType === 'create-column') {
-    modalTitle = 'New Column'
-    buttonText = 'Create Column'
-    modalBody = ModalBodyCreateEditColumn('Enter Name')
+  switch (modalType) {
+    case 'create-column':
+      modalTitle = 'New Column'
+      buttonText = 'Create Column'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyCreateEditColumn('Enter Name')
+      break
+    case 'create-cell':
+      modalTitle = 'New Cell'
+      buttonText = 'Create Cell'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyCreateEditCell('*')
+      break
+    case 'edit-column':
+      modalTitle = 'Rename Column'
+      buttonText = 'Submit'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyCreateEditColumn('Enter New Name')
+      break
+    case 'edit-cell':
+      modalTitle = 'Edit Cell'
+      buttonText = 'Submit'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyCreateEditCell('')
+      break
+    case 'delete-column':
+      modalTitle = 'Delete The Column'
+      buttonText = 'Confirm'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyDelete(modalTitle)
+      danger = true
+      break
+    case 'delete-cell':
+      modalTitle = 'Delete The Cell'
+      buttonText = 'Confirm'
+      apiData = {
+        token: user.token,
+        elementId
+      }
+      modalBody = ModalBodyDelete(modalTitle)
+      danger = true
+      break
   }
-  if (modalType === 'create-cell') {
-    modalTitle = 'New Cell'
-    buttonText = 'Create Cell'
-    modalBody = ModalBodyCreateEditCell('*')
-  }
-  if (modalType === 'edit-column') {
-    modalTitle = 'Edit Column'
-    buttonText = 'Submit'
-    modalBody = ModalBodyCreateEditColumn('Enter New Name')
-  }
-  if (modalType === 'edit-cell') {
-    modalTitle = 'Edit Cell'
-    buttonText = 'Submit'
-    modalBody = ModalBodyCreateEditCell('')
-  }
-  if (modalType === 'delete-column') {
-    modalTitle = 'Delete The Column'
-    buttonText = 'Confirm'
-    modalBody = ModalBodyDelete(modalTitle)
-    danger = true
-  }
-  if (modalType === 'delete-cell') {
-    modalTitle = 'Delete The Cell'
-    buttonText = 'Confirm'
-    modalBody = ModalBodyDelete(modalTitle)
-    danger = true
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    apiData.form = {}
+    if (event.currentTarget[0].id !== 'name') {
+      apiData.form.companyName = event.currentTarget
+    } else {
+      apiData.form.name = event.currentTarget[0].value
+    }
+    await apiCall(apiData)
+    const updatedBoard = await getBoard(user)
+    await setBoard(updatedBoard)
+    props.handleClose()
   }
 
   return (
@@ -47,11 +90,9 @@ const NewModal = props => {
       <Modal.Header closeButton>
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Modal.Body>
-          <Form.Group className='mb-3' controlId='controlInput'>
-            {modalBody}
-          </Form.Group>
+          <Form.Group className='mb-3'>{modalBody}</Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button type='reset' variant='secondary' onClick={props.handleClose}>
