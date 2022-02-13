@@ -1,7 +1,90 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const getBoard = (user) => {
+//  CREATE
+export const createColumn = apiData => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/column/',
+    headers: {
+      Authorization: `Bearer ${apiData.token}`
+    },
+    data: {
+      elementId: apiData.elementId,
+      form: apiData.form
+    }
+  })
+}
+
+//  CREATE
+export const createCell = apiData => {
+  return axios({
+    url: apiUrl + '/cell/',
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiData.token}`
+    },
+    data: {
+      elementId: apiData.elementId,
+      form: apiData.form
+    }
+  })
+}
+
+//  EDIT
+export const editColumn = apiData => {
+  return axios({
+    url: apiUrl + '/column/' + apiData.elementId,
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${apiData.token}`
+    },
+    data: {
+      elementId: apiData.elementId,
+      form: apiData.form
+    }
+  })
+}
+
+// EDIT
+export const editCell = apiData => {
+  return axios({
+    url: apiUrl + '/cell/' + apiData.elementId,
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${apiData.token}`
+    },
+    data: {
+      elementId: apiData.elementId,
+      form: apiData.form
+    }
+  })
+}
+
+// DELETE
+export const deleteColumn = apiData => {
+  return axios({
+    url: apiUrl + '/column/' + apiData.elementId,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${apiData.token}`
+    }
+  })
+}
+
+// DELETE
+export const deleteCell = data => {
+  return axios({
+    url: apiUrl + '/cell/' + data.elementId,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${data.token}`
+    }
+  })
+}
+
+// SHOW
+export const getBoard = user => {
   return axios({
     method: 'GET',
     url: apiUrl + '/board/',
@@ -11,76 +94,13 @@ export const getBoard = (user) => {
   })
 }
 
-export const getColumn = (data) => {
+// SHOW
+export const getColumn = apiData => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/column/' + data.id,
+    url: apiUrl + '/column/' + apiData.elementId,
     headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  })
-}
-
-export const createColumn = (data) => {
-  return axios({
-    method: 'POST',
-    url: apiUrl + '/column/',
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    },
-    data
-  })
-}
-
-export const createCell = (data) => {
-  return axios({
-    url: apiUrl + '/cell/',
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    },
-    data
-  })
-}
-
-export const editColumn = (data) => {
-  return axios({
-    url: apiUrl + '/column/' + data.id,
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    },
-    data
-  })
-}
-
-export const editCell = (data) => {
-  return axios({
-    url: apiUrl + '/cell/' + data.id,
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    },
-    data
-  })
-}
-
-export const deleteColumn = (data) => {
-  return axios({
-    url: apiUrl + '/column/' + data.id,
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${data.token}`
-    }
-  })
-}
-
-export const deleteCell = (data) => {
-  return axios({
-    url: apiUrl + '/cell/' + data.id,
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${data.token}`
+      Authorization: `Bearer ${apiData.token}`
     }
   })
 }
