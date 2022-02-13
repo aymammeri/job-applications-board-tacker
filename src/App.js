@@ -22,15 +22,17 @@ class App extends Component {
       board: null,
       modalShow: false,
       modalType: null,
-      elementId: null
+      elementId: null,
+      apiCall: null
     }
   }
 
   setUser = user => this.setState({ user })
+  clearUser = () => this.setState({ user: null })
   setBoard = board => this.setState({ board })
   setModalType = str => this.setState({ modalType: str })
   setElementID = id => this.setState({ elementId: id })
-  clearUser = () => this.setState({ user: null })
+  setApiCall = fun => this.setState({ apiCall: fun })
 
   handleShow = () => this.setState({ modalShow: true })
   handleClose = () => this.setState({ modalShow: false })
@@ -112,12 +114,13 @@ class App extends Component {
                 board={board}
                 setModalType={this.setModalType}
                 setElementID={this.setElementID}
+                setApiCall={this.setApiCall}
                 handleShow={this.handleShow}
               />
             )}
           />
         </main>
-        <NewModal modalType={this.state.modalType} elementId={this.state.elementId} show={this.state.modalShow} handleClose={this.handleClose} />
+        <NewModal modalType={this.state.modalType} elementId={this.state.elementId} apiCall={this.state.apiCall} show={this.state.modalShow} handleClose={this.handleClose} user={this.state.user} setBoard={this.setBoard}/>
       </Fragment>
     )
   }
