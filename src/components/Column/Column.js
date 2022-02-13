@@ -4,7 +4,7 @@ import { Col, Stack, DropdownButton, Dropdown } from 'react-bootstrap'
 import Cell from '../Cell/Cell.js'
 
 const Column = props => {
-  const { id, cells, setModalType, setModalProps, handleShow } = props
+  const { id, cells, setModalType, setElementID, handleShow } = props
   const [cellsJSX, setCellsJSX] = useState(null)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Column = props => {
           id={cell._id}
           column={id}
           setModalType={setModalType}
-          setModalProps={setModalProps}
+          setElementID={setElementID}
           handleShow={handleShow}
         />
       ))
@@ -37,16 +37,26 @@ const Column = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('edit-column')
+              setElementID({ id })
               handleShow()
             }}
           >
             Rename
           </Dropdown.Item>
-          <Dropdown.Item>Delete</Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              setModalType('delete-column')
+              setElementID({ id })
+              handleShow()
+            }}
+          >
+            Delete
+          </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item
             onClick={() => {
               setModalType('create-cell')
+              setElementID({ id })
               handleShow()
             }}
           >

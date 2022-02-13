@@ -2,7 +2,7 @@ import React from 'react'
 import { Stack, DropdownButton, Dropdown, Card } from 'react-bootstrap'
 
 const Cell = props => {
-  const { id, column, setModalType, handleShow } = props
+  const { id, column, setModalType, setElementID, handleShow } = props
   return (
     <Card
       id={id}
@@ -22,12 +22,21 @@ const Cell = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('edit-cell')
+              setElementID({ id })
               handleShow()
             }}
           >
             Edit
           </Dropdown.Item>
-          <Dropdown.Item href='#/action-3'>Delete</Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              setModalType('delete-cell')
+              setElementID({ id })
+              handleShow()
+            }}
+          >
+            Delete
+          </Dropdown.Item>
         </DropdownButton>
       </Stack>
     </Card>
