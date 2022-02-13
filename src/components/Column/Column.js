@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Stack, DropdownButton, Dropdown } from 'react-bootstrap'
-// import { createCell } from '../../api/crud.js'
+import { createCell, deleteColumn, editColumn } from '../../api/crud.js'
 import Cell from '../Cell/Cell.js'
 
 const Column = props => {
-  const { id, cells, setModalType, setElementID, handleShow } = props
+  const { id, name, cells, setModalType, setElementID, setApiCall, handleShow } = props
   const [cellsJSX, setCellsJSX] = useState(null)
 
   useEffect(() => {
@@ -12,20 +12,21 @@ const Column = props => {
       cells.map(cell => (
         <Cell
           key={cells.indexOf(cell)}
-          id={cell._id}
           column={id}
           setModalType={setModalType}
           setElementID={setElementID}
+          setApiCall={setApiCall}
           handleShow={handleShow}
+          {...cell}
         />
       ))
     )
-  }, [])
+  }, [cells])
 
   return (
     <Col id={id} className='column border border-dark fluid m-3 pb-3'>
       <Stack className='d-flex'>
-        <div className='text-center pt-2'>Title</div>
+        <h6 className='text-center pt-2'>{name}</h6>
         <DropdownButton
           className='ms-auto'
           variant='link'
@@ -37,26 +38,29 @@ const Column = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('edit-column')
-              setElementID({ id })
+              setElementID(...id)
+              setApiCall(editColumn)
               handleShow()
             }}
           >
-            Rename
+            Rename Column
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
               setModalType('delete-column')
-              setElementID({ id })
+              setElementID(...id)
+              setApiCall(deleteColumn)
               handleShow()
             }}
           >
-            Delete
+            Delete Column
           </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item
             onClick={() => {
               setModalType('create-cell')
-              setElementID({ id })
+              setElementID(...id)
+              setApiCall(createCell)
               handleShow()
             }}
           >
