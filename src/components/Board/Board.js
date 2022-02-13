@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Container, Row, Stack } from 'react-bootstrap'
 import Column from '../Column/Column'
-// import { createColumn } from '../../api/crud'
+import { createColumn } from '../../api/crud'
 
 const Board = props => {
-  const { board, setModalType, setElementID, handleShow } = props
+  const { board, setModalType, setElementID, setApiCall, handleShow } = props
   const [boardJSX, setBoardJSX] = useState(null)
-
+  const id = board._id
   useEffect(() => {
     setBoardJSX(
       <Container id='board' className='border border-dark'>
@@ -17,7 +17,8 @@ const Board = props => {
             className='ms-auto p-2'
             onClick={() => {
               setModalType('create-column')
-              setElementID({ id: board._id })
+              setElementID(id)
+              setApiCall(createColumn)
               handleShow()
             }}
           >
@@ -31,12 +32,12 @@ const Board = props => {
         <Row>
           {board.columns.map(col => (
             <Column
-              id={col._id}
               key={board.columns.indexOf(col)}
-              cells={col.cells}
               setModalType={setModalType}
               setElementID={setElementID}
+              setApiCall={setApiCall}
               handleShow={handleShow}
+              {...col}
             />
           ))}
         </Row>
