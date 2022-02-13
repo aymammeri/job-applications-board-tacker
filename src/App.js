@@ -22,14 +22,14 @@ class App extends Component {
       board: null,
       modalShow: false,
       modalType: null,
-      modalProps: null
+      elementId: null
     }
   }
 
   setUser = user => this.setState({ user })
   setBoard = board => this.setState({ board })
   setModalType = str => this.setState({ modalType: str })
-  setModalProps = parentId => this.setState({ modalProps: parentId })
+  setElementID = id => this.setState({ elementId: id })
   clearUser = () => this.setState({ user: null })
 
   handleShow = () => this.setState({ modalShow: true })
@@ -111,13 +111,13 @@ class App extends Component {
                 user={user}
                 board={board}
                 setModalType={this.setModalType}
-                setModalProps={this.setModalProps}
+                setElementID={this.setElementID}
                 handleShow={this.handleShow}
               />
             )}
           />
         </main>
-        <NewModal modalType={this.state.modalType} modalProps={this.state.modalProps} show={this.state.modalShow} handleClose={this.handleClose} />
+        <NewModal modalType={this.state.modalType} elementId={this.state.elementId} show={this.state.modalShow} handleClose={this.handleClose} />
       </Fragment>
     )
   }

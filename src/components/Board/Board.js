@@ -4,7 +4,7 @@ import Column from '../Column/Column'
 // import { createColumn } from '../../api/crud'
 
 const Board = props => {
-  const { board, setModalType, setModalProps, handleShow } = props
+  const { board, setModalType, setElementID, handleShow } = props
   const [boardJSX, setBoardJSX] = useState(null)
 
   useEffect(() => {
@@ -17,6 +17,7 @@ const Board = props => {
             className='ms-auto p-2'
             onClick={() => {
               setModalType('create-column')
+              setElementID({ id: board._id })
               handleShow()
             }}
           >
@@ -34,7 +35,7 @@ const Board = props => {
               key={board.columns.indexOf(col)}
               cells={col.cells}
               setModalType={setModalType}
-              setModalProps={setModalProps}
+              setElementID={setElementID}
               handleShow={handleShow}
             />
           ))}
