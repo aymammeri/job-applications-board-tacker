@@ -3,9 +3,7 @@ import { Stack, DropdownButton, Dropdown, Card } from 'react-bootstrap'
 import { deleteCell, editCell } from '../../api/crud'
 
 const Cell = props => {
-  const { id, column, setModalType, setElementID, setApiCall, handleShow } =
-    props
-  const { company } = props
+  const { id, column, setModalType, setElementID, setApiCall, handleShow, company } = props
   const [cellJSX, setCellJSX] = useState(null)
 
   useEffect(() => {
