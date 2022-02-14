@@ -29,7 +29,7 @@ const Cell = props => {
               onClick={() => {
                 setModalType('edit-cell')
                 setElementID(id)
-                setApiCall(editCell)
+                setApiCall({ call: editCell })
                 handleShow()
               }}
             >
@@ -39,7 +39,7 @@ const Cell = props => {
               onClick={() => {
                 setModalType('delete-cell')
                 setElementID(id)
-                setApiCall(deleteCell)
+                setApiCall({ call: deleteCell })
                 handleShow()
               }}
             >
@@ -49,7 +49,7 @@ const Cell = props => {
         </Stack>
       </Card>
     )
-  }, [Cell])
+  }, [])
   return <>{cellJSX}</>
 }
 

@@ -7,6 +7,7 @@ const Board = props => {
   const { board, setModalType, setElementID, setApiCall, handleShow } = props
   const [boardJSX, setBoardJSX] = useState(null)
   const id = board._id
+
   useEffect(() => {
     setBoardJSX(
       <Container id='board' className='border border-dark'>
@@ -18,7 +19,7 @@ const Board = props => {
             onClick={() => {
               setModalType('create-column')
               setElementID(id)
-              setApiCall(createColumn)
+              setApiCall({ call: createColumn })
               handleShow()
             }}
           >
@@ -44,7 +45,7 @@ const Board = props => {
         </Row>
       </Container>
     )
-  }, [])
+  }, [board])
 
   return <>{boardJSX}</>
 }

@@ -21,7 +21,7 @@ const Column = props => {
         />
       ))
     )
-  }, [cells])
+  }, [])
 
   return (
     <Col id={id} className='column border border-dark fluid m-3 pb-3'>
@@ -39,7 +39,7 @@ const Column = props => {
             onClick={() => {
               setModalType('edit-column')
               setElementID(id)
-              setApiCall(editColumn)
+              setApiCall({ call: editColumn })
               handleShow()
             }}
           >
@@ -49,7 +49,7 @@ const Column = props => {
             onClick={() => {
               setModalType('delete-column')
               setElementID(id)
-              setApiCall(deleteColumn)
+              setApiCall({ call: deleteColumn })
               handleShow()
             }}
           >
@@ -60,7 +60,7 @@ const Column = props => {
             onClick={() => {
               setModalType('create-cell')
               setElementID(id)
-              setApiCall(createCell)
+              setApiCall({ call: createCell })
               handleShow()
             }}
           >
