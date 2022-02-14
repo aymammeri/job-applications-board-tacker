@@ -9,7 +9,7 @@ const Column = props => {
 
   useEffect(() => {
     setCellsJSX(
-      cells.map(cell => (
+      cells?.map(cell => (
         <Cell
           key={cells.indexOf(cell)}
           id={cell._id}

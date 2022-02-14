@@ -45,19 +45,9 @@ const Board = props => {
         </Row>
       </Container>
     )
-  }, [board])
+  }, [board.columns])
 
   return <>{boardJSX}</>
 }
 
 export default Board
-
-// const handleAddColumn = () => {
-//   createColumn({
-//     token: user.token,
-//     column: {
-//       board: board._id,
-//       owner: user._id
-//     }
-//   })
-// }

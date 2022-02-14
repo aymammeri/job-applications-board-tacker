@@ -3,7 +3,7 @@ import { Stack, DropdownButton, Dropdown, Card } from 'react-bootstrap'
 import { deleteCell, editCell } from '../../api/crud'
 
 const Cell = props => {
-  const { id, column, setModalType, setElementID, setApiCall, handleShow, company } = props
+  const { id, setModalType, setElementID, setApiCall, handleShow, company } = props
   const [cellJSX, setCellJSX] = useState(null)
 
   useEffect(() => {
@@ -11,7 +11,6 @@ const Cell = props => {
       <Card
         id={id}
         className='bg-color-primary border border-dark cell'
-        parent={column}
       >
         <Stack className='d-flex'>
           <img src='https://icongr.am/devicon/google-original.svg?size=14&color=currentColor' />
@@ -48,6 +47,7 @@ const Cell = props => {
       </Card>
     )
   }, [])
+
   return <>{cellJSX}</>
 }
 
