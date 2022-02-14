@@ -1,1 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
+
+body * {
+  margin: 5px;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}

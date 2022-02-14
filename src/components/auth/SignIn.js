@@ -25,10 +25,13 @@ handleChange = (event) =>
 onSignIn = (event) => {
   event.preventDefault()
 
-  const { msgAlert, history, setUser } = this.props
+  const { msgAlert, history, setUser, setBoard } = this.props
 
   signIn(this.state)
-    .then((res) => setUser(res.data.user))
+    .then((res) => {
+      setUser(res.data.user)
+      setBoard(res.data.board)
+    })
     .then(() =>
       msgAlert({
         heading: 'Sign In Success',
