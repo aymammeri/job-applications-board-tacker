@@ -21,7 +21,7 @@ const Column = props => {
         />
       ))
     )
-  }, [])
+  }, [cells])
 
   return (
     <Col id={id} className='column border border-dark fluid m-3 pb-3'>
