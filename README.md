@@ -5,9 +5,8 @@ This application helps you keep your job hunt organize and easy to keep track of
 
 - App Screenshot:
 
-![Job-Board-Tracker-Screenshot](https://imgur.com/gallery/eVaxm55)
+![Job-Board-Tracker-Screenshot](https://user-images.githubusercontent.com/47344044/153896757-d34be870-6e84-425d-8d20-571c4378f63d.png)
 
-## How to Use:
 ==============
 
 Notes: 
