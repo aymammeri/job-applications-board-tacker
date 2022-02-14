@@ -38,7 +38,7 @@ onSignUp = (event) => {
         variant: 'success'
       })
     )
-    .then(() => history.push('/'))
+    .then(() => history.push('/sign-in'))
     .catch((error) => {
       this.setState({ email: '', password: '', passwordConfirmation: '' })
       msgAlert({
