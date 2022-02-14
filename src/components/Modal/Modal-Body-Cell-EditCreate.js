@@ -60,8 +60,9 @@ const ModalBody = props => (
         placeholder='1'
       />
     </FloatingLabel>
-    <FloatingLabel controlId='floatingTextarea2' label='Description'>
+    <FloatingLabel htmlFor='description' label='Description'>
       <Form.Control
+        id='description'
         as='textarea'
         placeholder='Write a description here'
         style={{ height: '150px' }}

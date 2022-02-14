@@ -9,7 +9,7 @@ import { getBoard } from '../../api/crud'
 
 const NewModal = props => {
   // eslint-disable-next-line no-unused-vars
-  const { modalType, elementId, apiCall, user, setBoard } = props
+  const { modalType, elementId, apiCall, user, setBoard, handleClose } = props
   let [modalTitle, modalBody, apiData, buttonText, danger] = []
 
   switch (modalType) {
@@ -55,7 +55,13 @@ const NewModal = props => {
       form: {}
     }
     if (event.currentTarget[0].id !== 'name') {
-      // apiData.form.companyName = event.currentTarget
+      if (event.currentTarget[0].value) apiData.form.company = event.currentTarget[0].value
+      if (event.currentTarget[1]) apiData.form.position = event.currentTarget[1].value
+      if (event.currentTarget[2]) apiData.form.location = event.currentTarget[2].value
+      if (event.currentTarget[3]) apiData.form.contactName = event.currentTarget[3].value
+      if (event.currentTarget[4]) apiData.form.contactTitle = event.currentTarget[4].value
+      if (event.currentTarget[5]) apiData.form.contactEmail = event.currentTarget[5].value
+      if (event.currentTarget[6]) apiData.form.description = event.currentTarget[6].value
     } else {
       apiData.form.name = event.currentTarget[0].value
     }
@@ -63,7 +69,7 @@ const NewModal = props => {
       await apiCall.call(apiData)
       const response = await getBoard(user)
       setBoard(response.data.board)
-      props.handleClose()
+      handleClose()
     }
 
     callApi()
