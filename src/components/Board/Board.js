@@ -33,6 +33,7 @@ const Board = props => {
           {board.columns.map(col => (
             <Column
               key={board.columns.indexOf(col)}
+              id={col._id}
               setModalType={setModalType}
               setElementID={setElementID}
               setApiCall={setApiCall}
