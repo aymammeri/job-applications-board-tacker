@@ -1,5 +1,5 @@
 /* eslint-disable no-tabs */
-import React, { Component, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
@@ -13,117 +13,100 @@ import ChangePassword from './components/auth/ChangePassword'
 import Board from './components/Board/Board'
 import NewModal from './components/Modal/Modal'
 
-class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      user: null,
-      msgAlerts: [],
-      board: null,
-      modalShow: false,
-      modalType: null,
-      elementId: null,
-      apiCall: null
-    }
-  }
+const App = () => {
+  const [user, setUser] = useState(null)
+  const [msgAlerts, setMsgAlerts] = useState([])
+  const [board, setBoard] = useState(null)
+  const [modalShow, setModalShow] = useState(false)
+  const [modalType, setModalType] = useState(null)
+  const [elementID, setElementID] = useState(null)
+  const [apiCall, setApiCall] = useState(null)
 
-  setUser = user => this.setState({ user })
-  clearUser = () => this.setState({ user: null })
-  setBoard = board => this.setState({ board })
-  setModalType = str => this.setState({ modalType: str })
-  setElementID = id => this.setState({ elementId: id })
-  setApiCall = fun => this.setState({ apiCall: fun })
+  const clearUser = () => setUser(null)
+  const handleShow = () => setModalShow(true)
+  const handleClose = () => setModalShow(false)
+  const deleteAlert = id => setMsgAlerts(msgAlerts.filter(msg => msg.id !== id))
 
-  handleShow = () => this.setState({ modalShow: true })
-  handleClose = () => this.setState({ modalShow: false })
-
-  deleteAlert = id => {
-    this.setState(state => {
-      return { msgAlerts: state.msgAlerts.filter(msg => msg.id !== id) }
-    })
-  }
-
-  msgAlert = ({ heading, message, variant }) => {
+  const msgAlert = ({ heading, message, variant }) => {
     const id = uuid()
-    this.setState(state => {
-      return {
-        msgAlerts: [...state.msgAlerts, { heading, message, variant, id }]
-      }
-    })
+    return setMsgAlerts([...msgAlerts, { heading, message, variant, id }])
   }
 
-  render () {
-    const { msgAlerts, user, board } = this.state
-
-    return (
-      <Fragment>
-        <Header user={user} />
-        {msgAlerts.map(msgAlert => (
-          <AutoDismissAlert
-            key={msgAlert.id}
-            heading={msgAlert.heading}
-            variant={msgAlert.variant}
-            message={msgAlert.message}
-            id={msgAlert.id}
-            deleteAlert={this.deleteAlert}
-          />
-        ))}
-        <main className='container'>
-          <Route
-            path='/sign-up'
-            render={() => (
-              <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
-            )}
-          />
-          <Route
-            path='/sign-in'
-            render={() => (
-              <SignIn
-                msgAlert={this.msgAlert}
-                setUser={this.setUser}
-                setBoard={this.setBoard}
-              />
-            )}
-          />
-          <AuthenticatedRoute
-            user={user}
-            path='/sign-out'
-            render={() => (
-              <SignOut
-                msgAlert={this.msgAlert}
-                clearUser={this.clearUser}
-                user={user}
-              />
-            )}
-          />
-          <AuthenticatedRoute
-            user={user}
-            path='/change-password'
-            render={() => (
-              <ChangePassword msgAlert={this.msgAlert} user={user} />
-            )}
-          />
-          <AuthenticatedRoute
-            user={user}
-            exact
-            path='/'
-            render={() => (
-              <Board
-                msgAlert={this.msgAlert}
-                user={user}
-                board={board}
-                setModalType={this.setModalType}
-                setElementID={this.setElementID}
-                setApiCall={this.setApiCall}
-                handleShow={this.handleShow}
-              />
-            )}
-          />
-        </main>
-        <NewModal modalType={this.state.modalType} elementId={this.state.elementId} apiCall={this.state.apiCall} show={this.state.modalShow} handleClose={this.handleClose} user={this.state.user} setBoard={this.setBoard}/>
-      </Fragment>
-    )
-  }
+  return (
+    <Fragment>
+      <Header user={user} />
+      {msgAlerts.map(msgAlert => (
+        <AutoDismissAlert
+          key={msgAlert.id}
+          heading={msgAlert.heading}
+          variant={msgAlert.variant}
+          message={msgAlert.message}
+          id={msgAlert.id}
+          deleteAlert={deleteAlert}
+        />
+      ))}
+      <main className='container'>
+        <Route
+          path='/sign-up'
+          render={() => (
+            <SignUp msgAlert={msgAlert} setUser={setUser} />
+          )}
+        />
+        <Route
+          path='/sign-in'
+          render={() => (
+            <SignIn
+              msgAlert={msgAlert}
+              setUser={setUser}
+              setBoard={setBoard}
+            />
+          )}
+        />
+        <AuthenticatedRoute
+          user={user}
+          path='/sign-out'
+          render={() => (
+            <SignOut
+              msgAlert={msgAlert}
+              clearUser={clearUser}
+              setBoard={setBoard}
+              user={user}
+            />
+          )}
+        />
+        <AuthenticatedRoute
+          user={user}
+          path='/change-password'
+          render={() => <ChangePassword msgAlert={msgAlert} user={user} />}
+        />
+        <AuthenticatedRoute
+          user={user}
+          exact
+          path='/'
+          render={() => (
+            <Board
+              msgAlert={msgAlert}
+              user={user}
+              board={board}
+              setModalType={setModalType}
+              setElementID={setElementID}
+              setApiCall={setApiCall}
+              handleShow={handleShow}
+            />
+          )}
+        />
+      </main>
+      <NewModal
+        modalType={modalType}
+        elementId={elementID}
+        apiCall={apiCall}
+        show={modalShow}
+        handleClose={handleClose}
+        user={user}
+        setBoard={setBoard}
+      />
+    </Fragment>
+  )
 }
 
 export default App
