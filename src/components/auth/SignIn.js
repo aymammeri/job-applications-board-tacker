@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+import { useDispatch } from 'react-redux'
 import { signInAction } from '../../Store/authSlice/authActions'
-=======
-import { signInAction } from '../../Store/authSlice/authThunks'
->>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
-=======
-import { signInAction } from '../../Store/authSlice/authActions'
->>>>>>> 9f7c674 (Variable rename)
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'

@@ -106,28 +106,3 @@ export const deleteCell = data => {
     }
   })
 }
-<<<<<<< HEAD
-=======
-
-// SHOW
-export const getBoard = token => {
-  return axios({
-    method: 'GET',
-    url: apiUrl + '/board/',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-}
-
-// SHOW
-export const getColumn = apiData => {
-  return axios({
-    method: 'GET',
-    url: apiUrl + '/column/' + apiData.elementId,
-    headers: {
-      Authorization: `Bearer ${apiData.token}`
-    }
-  })
-}
->>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
