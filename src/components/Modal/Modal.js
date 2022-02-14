@@ -16,73 +16,57 @@ const NewModal = props => {
     case 'create-column':
       modalTitle = 'New Column'
       buttonText = 'Create Column'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyCreateEditColumn('Enter Name')
       break
     case 'create-cell':
       modalTitle = 'New Cell'
       buttonText = 'Create Cell'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyCreateEditCell('*')
       break
     case 'edit-column':
       modalTitle = 'Rename Column'
       buttonText = 'Submit'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyCreateEditColumn('Enter New Name')
       break
     case 'edit-cell':
       modalTitle = 'Edit Cell'
       buttonText = 'Submit'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyCreateEditCell('')
       break
     case 'delete-column':
       modalTitle = 'Delete The Column'
       buttonText = 'Confirm'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyDelete(modalTitle)
       danger = true
       break
     case 'delete-cell':
       modalTitle = 'Delete The Cell'
       buttonText = 'Confirm'
-      apiData = {
-        token: user.token,
-        elementId
-      }
       modalBody = ModalBodyDelete(modalTitle)
       danger = true
       break
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = event => {
     event.preventDefault()
-    apiData.form = {}
+    apiData = {
+      token: user.token,
+      elementId,
+      form: {}
+    }
     if (event.currentTarget[0].id !== 'name') {
-      apiData.form.companyName = event.currentTarget
+      // apiData.form.companyName = event.currentTarget
     } else {
       apiData.form.name = event.currentTarget[0].value
     }
-    await apiCall(apiData)
-    const updatedBoard = await getBoard(user)
-    await setBoard(updatedBoard)
-    props.handleClose()
+    const callApi = async () => {
+      await apiCall(apiData)
+      const updatedBoard = await getBoard(user)
+      await setBoard(updatedBoard)
+      props.handleClose()
+    }
+
+    callApi()
   }
 
   return (
