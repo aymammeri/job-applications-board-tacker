@@ -60,9 +60,9 @@ const NewModal = props => {
       apiData.form.name = event.currentTarget[0].value
     }
     const callApi = async () => {
-      await apiCall(apiData)
-      const updatedBoard = await getBoard(user)
-      await setBoard(updatedBoard)
+      await apiCall.call(apiData)
+      const response = await getBoard(user)
+      setBoard(response.data.board)
       props.handleClose()
     }
 
