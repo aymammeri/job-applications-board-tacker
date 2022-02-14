@@ -12,7 +12,7 @@ const Column = props => {
       cells.map(cell => (
         <Cell
           key={cells.indexOf(cell)}
-          column={id}
+          id={cell._id}
           setModalType={setModalType}
           setElementID={setElementID}
           setApiCall={setApiCall}
@@ -38,7 +38,7 @@ const Column = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('edit-column')
-              setElementID(...id)
+              setElementID(id)
               setApiCall(editColumn)
               handleShow()
             }}
@@ -48,7 +48,7 @@ const Column = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('delete-column')
-              setElementID(...id)
+              setElementID(id)
               setApiCall(deleteColumn)
               handleShow()
             }}
@@ -59,7 +59,7 @@ const Column = props => {
           <Dropdown.Item
             onClick={() => {
               setModalType('create-cell')
-              setElementID(...id)
+              setElementID(id)
               setApiCall(createCell)
               handleShow()
             }}

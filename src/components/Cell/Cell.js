@@ -28,7 +28,7 @@ const Cell = props => {
             <Dropdown.Item
               onClick={() => {
                 setModalType('edit-cell')
-                setElementID(...id)
+                setElementID(id)
                 setApiCall(editCell)
                 handleShow()
               }}
@@ -38,7 +38,7 @@ const Cell = props => {
             <Dropdown.Item
               onClick={() => {
                 setModalType('delete-cell')
-                setElementID(...id)
+                setElementID(id)
                 setApiCall(deleteCell)
                 handleShow()
               }}
