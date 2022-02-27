@@ -36,7 +36,7 @@ const Cell = props => {
               <Dropdown.Item
                 onClick={() => {
                   dispatch(
-                    modalSwitch({ modalType: 'edit-cell', elementID: id })
+                    modalSwitch({ modalType: 'edit-cell', parentId: id })
                   )
                 }}
               >
@@ -45,7 +45,7 @@ const Cell = props => {
               <Dropdown.Item
                 onClick={() => {
                   dispatch(
-                    modalSwitch({ modalType: 'delete-cell', elementID: id })
+                    modalSwitch({ modalType: 'delete-cell', parentId: id })
                   )
                 }}
               >
