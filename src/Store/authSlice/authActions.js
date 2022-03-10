@@ -1,12 +1,12 @@
+import * as authApi from '../../api/auth'
+
 import { userAuthActions } from './authReducer'
 import { boardActions } from '../boardSlice/boardReducer'
-
-import * as apiAuth from '../../api/auth'
 
 export const signUpAction = credentials => {
   return dispatch => {
     const signUp = async () => {
-      const response = await apiAuth.signUp(credentials)
+      const response = await authApi.signUp(credentials)
       const user = response.data.user
 
       dispatch(userAuthActions.setUser(user))
@@ -22,7 +22,7 @@ export const signUpAction = credentials => {
 export const signInAction = credentials => {
   return dispatch => {
     const signIn = async () => {
-      const response = await apiAuth.signIn(credentials)
+      const response = await authApi.signIn(credentials)
 
       const user = response.data.user
       const board = response.data.board
@@ -41,7 +41,7 @@ export const signInAction = credentials => {
 export const signOutAction = user => {
   return dispatch => {
     const signOut = async () => {
-      await apiAuth.signOut(user)
+      await authApi.signOut(user)
       dispatch(userAuthActions.clearUser())
     }
     try {
@@ -55,7 +55,7 @@ export const signOutAction = user => {
 export const changePasswordAction = (passwords, user) => {
   return dispatch => {
     const changePass = async () => {
-      await apiAuth.changePassword(passwords, user)
+      await authApi.changePassword(passwords, user)
     }
     try {
       changePass()
