@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { modalActions } from '../../Store/modalSlice/modalReducer'
-import { modalApiCall } from '../../Store/modalSlice/modalThunk'
+import { modalApiCall } from '../../Store/modalSlice/modalActions'
 
 import { Button, Form, Modal } from 'react-bootstrap'
 
