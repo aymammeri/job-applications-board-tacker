@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { modalActions } from '../../Store/modalSlice/modalReducer'
+
 import { Button, Container, Row, Stack } from 'react-bootstrap'
 import Column from '../Column/Column'
-import { createColumn } from '../../api/crud'
 
 const Board = props => {
-  const { board, setModalType, setElementID, setApiCall, handleShow } = props
-  const [boardJSX, setBoardJSX] = useState(null)
+  const dispatch = useDispatch()
+  const setupModal = modalActions.setupModal
+
+  const board = useSelector(state => state.board.board)
   const id = board._id
+
+  const [boardJSX, setBoardJSX] = useState(null)
 
   useEffect(() => {
     setBoardJSX(
@@ -17,10 +24,9 @@ const Board = props => {
             variant='outline-link'
             className='ms-auto p-2'
             onClick={() => {
-              setModalType('create-column')
-              setElementID(id)
-              setApiCall({ call: createColumn })
-              handleShow()
+              dispatch(
+                setupModal({ modalType: 'create-column', elementID: id })
+              )
             }}
           >
             New Column
@@ -32,15 +38,7 @@ const Board = props => {
         </Stack>
         <Row>
           {board.columns.map(col => (
-            <Column
-              key={board.columns.indexOf(col)}
-              id={col._id}
-              setModalType={setModalType}
-              setElementID={setElementID}
-              setApiCall={setApiCall}
-              handleShow={handleShow}
-              {...col}
-            />
+            <Column key={board.columns.indexOf(col)} id={col._id} {...col} />
           ))}
         </Row>
       </Container>

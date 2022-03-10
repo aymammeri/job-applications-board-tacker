@@ -3,21 +3,21 @@ import { Form, FloatingLabel } from 'react-bootstrap'
 
 const ModalBody = props => (
   <>
-    <FloatingLabel htmlFor='companyName' label={`Company Name${props}`}>
+    <FloatingLabel htmlFor='company' label={`Company Name${props}`}>
       <Form.Control
         size='sm'
         type='text'
-        id='companyName'
+        id='company'
         aria-describedby='textHelpBlock'
         placeholder='1'
         required={props === '*'}
       />
     </FloatingLabel>
-    <FloatingLabel htmlFor='positionTitle' label={`Position Title${props}`}>
+    <FloatingLabel htmlFor='position' label={`Position Title${props}`}>
       <Form.Control
         size='sm'
         type='text'
-        id='positionTitle'
+        id='position'
         aria-describedby='textHelpBlock'
         placeholder='1'
         required={props === '*'}

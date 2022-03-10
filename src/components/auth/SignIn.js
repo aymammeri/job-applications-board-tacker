@@ -1,72 +1,47 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { signIn } from '../../api/auth'
-import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
+import { signInAction } from '../../Store/authSlice/authThunks'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class SignIn extends Component {
-  constructor (props) {
-    super(props)
+const SignIn = props => {
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const credentials = { email, password }
 
-    this.state = {
-      email: '',
-      password: ''
-    }
+  useEffect(() => {}, [credentials])
+
+  const handleChange = event => {
+    event.target.name === 'email'
+      ? setEmail(event.target.value)
+      : setPassword(event.target.value)
   }
 
-handleChange = (event) =>
-  this.setState({
-    [event.target.name]: event.target.value
-  })
+  const onSignIn = async event => {
+    event.preventDefault()
 
-onSignIn = (event) => {
-  event.preventDefault()
-
-  const { msgAlert, history, setUser, setBoard } = this.props
-
-  signIn(this.state)
-    .then((res) => {
-      setUser(res.data.user)
-      setBoard(res.data.board)
-    })
-    .then(() =>
-      msgAlert({
-        heading: 'Sign In Success',
-        message: signInSuccess,
-        variant: 'success'
-      })
-    )
-    .then(() => history.push('/'))
-    .catch((error) => {
-      this.setState({ email: '', password: '' })
-      msgAlert({
-        heading: 'Sign In Failed with error: ' + error.message,
-        message: signInFailure,
-        variant: 'danger'
-      })
-    })
-}
-
-render () {
-  const { email, password } = this.state
+    await dispatch(signInAction(credentials))
+    props.history.push('/')
+  }
 
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
         <h3>Sign In</h3>
-        <Form onSubmit={this.onSignIn}>
+        <Form onSubmit={onSignIn}>
           <Form.Group controlId='email'>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               required
               type='email'
               name='email'
-              value={email}
+              value={credentials.email}
               placeholder='Enter email'
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group controlId='password'>
@@ -74,18 +49,19 @@ render () {
             <Form.Control
               required
               name='password'
-              value={password}
+              value={credentials.password}
               type='password'
               placeholder='Password'
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </Form.Group>
-          <Button variant='primary' type='submit'>Submit</Button>
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
         </Form>
       </div>
     </div>
   )
-}
 }
 
 export default withRouter(SignIn)

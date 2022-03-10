@@ -84,12 +84,12 @@ export const deleteCell = data => {
 }
 
 // SHOW
-export const getBoard = user => {
+export const getBoard = token => {
   return axios({
     method: 'GET',
     url: apiUrl + '/board/',
     headers: {
-      Authorization: `Bearer ${user.token}`
+      Authorization: `Bearer ${token}`
     }
   })
 }
