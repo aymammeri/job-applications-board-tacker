@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { modalActions } from '../../Store/modalSlice/modalReducer'
+
 import { Col, Stack, DropdownButton, Dropdown } from 'react-bootstrap'
-import { createCell, deleteColumn, editColumn } from '../../api/crud.js'
 import Cell from '../Cell/Cell.js'
 
 const Column = props => {
-  const { id, name, cells, setModalType, setElementID, setApiCall, handleShow } = props
+  const dispatch = useDispatch()
+  const setupModal = modalActions.setupModal
+
+  const { id, name, cells } = props
+
   const [cellsJSX, setCellsJSX] = useState(null)
 
   useEffect(() => {
     setCellsJSX(
       cells?.map(cell => (
-        <Cell
-          key={cells.indexOf(cell)}
-          id={cell._id}
-          setModalType={setModalType}
-          setElementID={setElementID}
-          setApiCall={setApiCall}
-          handleShow={handleShow}
-          {...cell}
-        />
+        <Cell key={cells.indexOf(cell)} id={cell._id} {...cell} />
       ))
     )
   }, [cells])
@@ -37,20 +36,14 @@ const Column = props => {
         >
           <Dropdown.Item
             onClick={() => {
-              setModalType('edit-column')
-              setElementID(id)
-              setApiCall({ call: editColumn })
-              handleShow()
+              dispatch(setupModal({ modalType: 'edit-column', elementID: id }))
             }}
           >
             Rename Column
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              setModalType('delete-column')
-              setElementID(id)
-              setApiCall({ call: deleteColumn })
-              handleShow()
+              dispatch(setupModal({ modalType: 'delete-column', elementID: id }))
             }}
           >
             Delete Column
@@ -58,10 +51,7 @@ const Column = props => {
           <Dropdown.Divider />
           <Dropdown.Item
             onClick={() => {
-              setModalType('create-cell')
-              setElementID(id)
-              setApiCall({ call: createCell })
-              handleShow()
+              dispatch(setupModal({ modalType: 'create-cell', elementID: id }))
             }}
           >
             New Cell

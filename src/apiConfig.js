@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
   production: 'https://thawing-anchorage-80200.herokuapp.com',
-  development: 'https://thawing-anchorage-80200.herokuapp.com'
+  development: 'http://localhost:4741'
 }
 
 if (window.location.hostname === 'localhost') {

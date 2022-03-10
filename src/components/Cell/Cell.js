@@ -1,9 +1,15 @@
 import React from 'react'
+
+import { useDispatch } from 'react-redux'
+import { modalActions } from '../../Store/modalSlice/modalReducer'
+
 import { Stack, DropdownButton, Dropdown, Card } from 'react-bootstrap'
-import { deleteCell, editCell } from '../../api/crud'
 
 const Cell = props => {
-  const { id, setModalType, setElementID, setApiCall, handleShow, company } = props
+  const dispatch = useDispatch()
+  const setupModal = modalActions.setupModal
+
+  const { id, company } = props
 
   return (
     <Card id={id} className='bg-color-primary border border-dark cell'>
@@ -19,20 +25,14 @@ const Cell = props => {
         >
           <Dropdown.Item
             onClick={() => {
-              setModalType('edit-cell')
-              setElementID(id)
-              setApiCall({ call: editCell })
-              handleShow()
+              dispatch(setupModal({ modalType: 'edit-cell', elementID: id }))
             }}
           >
             Edit Cell
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              setModalType('delete-cell')
-              setElementID(id)
-              setApiCall({ call: deleteCell })
-              handleShow()
+              dispatch(setupModal({ modalType: 'delete-cell', elementID: id }))
             }}
           >
             Delete Cell
