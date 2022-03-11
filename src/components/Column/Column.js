@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { useDispatch } from 'react-redux'
 import { modalActions } from '../../Store/modalSlice/modalReducer'
@@ -11,16 +11,6 @@ const Column = props => {
   const setupModal = modalActions.setupModal
 
   const { id, name, cells } = props
-
-  const [cellsJSX, setCellsJSX] = useState(null)
-
-  useEffect(() => {
-    setCellsJSX(
-      cells?.map(cell => (
-        <Cell key={cells.indexOf(cell)} id={cell._id} {...cell} />
-      ))
-    )
-  }, [cells])
 
   return (
     <Col id={id} className='column border border-dark fluid m-3 pb-3'>
@@ -43,7 +33,9 @@ const Column = props => {
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
-              dispatch(setupModal({ modalType: 'delete-column', elementID: id }))
+              dispatch(
+                setupModal({ modalType: 'delete-column', elementID: id })
+              )
             }}
           >
             Delete Column
@@ -58,7 +50,9 @@ const Column = props => {
           </Dropdown.Item>
         </DropdownButton>
       </Stack>
-      {cellsJSX}
+      {cells?.map(cell => (
+        <Cell key={cells.indexOf(cell)} id={cell._id} {...cell} />
+      ))}
     </Col>
   )
 }
