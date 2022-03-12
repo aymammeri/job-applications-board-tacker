@@ -14,7 +14,7 @@ const NewModal = props => {
   const { modalSwitch } = modalActions
 
   const user = useSelector(state => state.auth.user)
-  const { modalType, parentId, show } = useSelector(state => state.modal)
+  const { modalType, elementId, show } = useSelector(state => state.modal)
 
   const modalOptions = modalSetup(modalType)
   let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
@@ -24,7 +24,7 @@ const NewModal = props => {
 
     apiData = {
       token: user.token,
-      parentId,
+      elementId,
       form: {}
     }
 
@@ -44,7 +44,7 @@ const NewModal = props => {
   return (
     <Modal
       show={show}
-      onHide={() => dispatch(modalSwitch({ modalType: null, parentId: null }))}
+      onHide={() => dispatch(modalSwitch({ modalType: null, elementId: null }))}
       centered
     >
       <Modal.Header closeButton>
@@ -59,7 +59,7 @@ const NewModal = props => {
             type='reset'
             variant='secondary'
             onClick={() =>
-              dispatch(modalSwitch({ modalType: null, parentId: null }))
+              dispatch(modalSwitch({ modalType: null, elementId: null }))
             }
           >
             Cancel

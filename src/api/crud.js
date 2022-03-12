@@ -44,14 +44,13 @@ export const getBoard = token => {
 
 // UPDATE MOVE CELLS
 export const move = data => {
-  const { ...fromData } = data
   return axios({
     url: apiUrl + '/column/',
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${data.token}`
     },
-    data: { ...fromData }
+    data: { ...data }
   })
 }
 

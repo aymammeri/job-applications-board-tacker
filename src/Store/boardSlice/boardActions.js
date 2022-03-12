@@ -1,5 +1,5 @@
-import store from '../../Store'
-// eslint-disable-next-line no-unused-vars
+import store from '../rootStore'
+
 import { move } from '../../api/crud'
 import { boardActions } from './boardReducer'
 

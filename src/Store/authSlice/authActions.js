@@ -53,9 +53,9 @@ export const signOutAction = user => {
 }
 
 export const changePasswordAction = (passwords, user) => {
-  return dispatch => {
+  return () => {
     const changePass = async () => {
-      await authApi.changePassword(passwords, user)
+      authApi.changePassword(passwords, user)
     }
     try {
       changePass()

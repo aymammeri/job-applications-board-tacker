@@ -20,8 +20,8 @@ const AuthenticatedRoute = ({
     return (
       <Route
         {...rest}
-        render={(props) =>
-          user ? <Component {...props} /> : <Redirect to='/' />
+        render={() =>
+          !user && <Redirect to='/' />
         }
       />
     )

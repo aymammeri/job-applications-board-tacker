@@ -32,7 +32,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'edit-column', parentId: id })
+                      setupModal({ modalType: 'edit-column', elementId: id })
                     )
                   }}
                 >
@@ -41,7 +41,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'delete-column', parentId: id })
+                      setupModal({ modalType: 'delete-column', elementId: id })
                     )
                   }}
                 >
@@ -51,7 +51,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'create-cell', parentId: id })
+                      setupModal({ modalType: 'create-cell', elementId: id })
                     )
                   }}
                 >
