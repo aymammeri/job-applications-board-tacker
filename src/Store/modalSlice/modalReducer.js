@@ -10,7 +10,7 @@ const modalSlice = createSlice({
   name: 'Modal',
   initialState,
   reducers: {
-    setupModal (state, action) {
+    modalSwitch (state, action) {
       state.modalType = action.payload.modalType
       state.elementID = action.payload.elementID
       state.show = !state.show

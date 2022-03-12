@@ -7,18 +7,17 @@ import { modalApiCall } from '../../Store/modalSlice/modalActions'
 
 import { Button, Form, Modal } from 'react-bootstrap'
 
-import modalSwitch from './ModalSetup'
+import modalSetup from './Modal-Setup'
 
 const NewModal = props => {
   const dispatch = useDispatch()
-  const setupModal = modalActions.setupModal
+  const { modalSwitch } = modalActions
 
   const user = useSelector(state => state.auth.user)
   const { modalType, elementID, show } = useSelector(state => state.modal)
 
-  const modalOptions = modalSwitch(modalType)
-  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } =
-    modalOptions
+  const modalOptions = modalSetup(modalType)
+  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -45,7 +44,7 @@ const NewModal = props => {
   return (
     <Modal
       show={show}
-      onHide={() => dispatch(setupModal({ modalType: null, elementID: null }))}
+      onHide={() => dispatch(modalSwitch({ modalType: null, elementID: null }))}
       centered
     >
       <Modal.Header closeButton>
@@ -60,7 +59,7 @@ const NewModal = props => {
             type='reset'
             variant='secondary'
             onClick={() =>
-              dispatch(setupModal({ modalType: null, elementID: null }))
+              dispatch(modalSwitch({ modalType: null, elementID: null }))
             }
           >
             Cancel
