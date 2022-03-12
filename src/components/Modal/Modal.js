@@ -3,6 +3,7 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { modalActions } from '../../Store/modalSlice/modalReducer'
+<<<<<<< HEAD
 import { modalApiCall } from '../../Store/modalSlice/modalActions'
 
 import { Button, Form, Modal } from 'react-bootstrap'
@@ -18,13 +19,35 @@ const NewModal = props => {
 
   const modalOptions = modalSetup(modalType)
   let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
+=======
+import { modalApiCall } from '../../Store/modalSlice/modalThunk'
+
+import { Button, Form, Modal } from 'react-bootstrap'
+
+import modalSwitch from './ModalSetup'
+
+const NewModal = props => {
+  const dispatch = useDispatch()
+  const setupModal = modalActions.setupModal
+
+  const user = useSelector(state => state.auth.user)
+  const { modalType, elementID, show } = useSelector(state => state.modal)
+
+  const modalOptions = modalSwitch(modalType)
+  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } =
+    modalOptions
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
 
   const handleSubmit = event => {
     event.preventDefault()
 
     apiData = {
       token: user.token,
+<<<<<<< HEAD
       parentId,
+=======
+      elementId: elementID,
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
       form: {}
     }
 
@@ -44,7 +67,11 @@ const NewModal = props => {
   return (
     <Modal
       show={show}
+<<<<<<< HEAD
       onHide={() => dispatch(modalSwitch({ modalType: null, parentId: null }))}
+=======
+      onHide={() => dispatch(setupModal({ modalType: null, elementID: null }))}
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
       centered
     >
       <Modal.Header closeButton>
@@ -59,7 +86,11 @@ const NewModal = props => {
             type='reset'
             variant='secondary'
             onClick={() =>
+<<<<<<< HEAD
               dispatch(modalSwitch({ modalType: null, parentId: null }))
+=======
+              dispatch(setupModal({ modalType: null, elementID: null }))
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
             }
           >
             Cancel

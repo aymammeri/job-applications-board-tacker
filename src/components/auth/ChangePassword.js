@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
+<<<<<<< HEAD
 import { changePasswordAction } from '../../Store/authSlice/authActions'
+=======
+import { changePasswordAction } from '../../Store/authSlice/authThunks'
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'

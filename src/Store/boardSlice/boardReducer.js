@@ -28,12 +28,15 @@ const boardSlice = createSlice({
     },
     deleteCell (state, action) {
       state.board[action.payload.columnID].splice(action.payload, 1)
+<<<<<<< HEAD
     },
     move (state, action) {
       const sourceCol = state.board.columns.find(col => col._id === action.payload.source.droppableId)
       const [removed] = sourceCol.cells.splice(action.payload.source.index, 1)
       const destinationCol = state.board.columns.find(col => col._id === action.payload.destination.droppableId)
       destinationCol.cells.splice(action.payload.destination.index, 0, removed)
+=======
+>>>>>>> cbfbd32 (Integrate Redux/toolkit and refactor codebase)
     }
   }
 })
