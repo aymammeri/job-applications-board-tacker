@@ -4,6 +4,9 @@ import { Route } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import Header from './components/Header/Header'
 import SignUp from './components/auth/SignUp'
@@ -39,6 +42,17 @@ const App = () => {
           render={() => <Board />}
         />
       </main>
+      <ToastContainer
+        position='top-right'
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
       <NewModal user={user} />
     </Fragment>
   )
