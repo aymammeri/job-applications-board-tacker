@@ -1,82 +1,52 @@
 /* eslint-disable indent */
 import React from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { modalActions } from '../../Store/modalSlice/modalReducer'
+import { modalApiCall } from '../../Store/modalSlice/modalActions'
+
 import { Button, Form, Modal } from 'react-bootstrap'
 
-import ModalBodyCreateEditColumn from './Modal-Body-Column-EditCreate'
-import ModalBodyCreateEditCell from './Modal-Body-Cell-EditCreate'
-import ModalBodyDelete from './Modal-Body-Delete'
-import { getBoard } from '../../api/crud'
+import modalSetup from './Modal-Setup'
 
 const NewModal = props => {
-  // eslint-disable-next-line no-unused-vars
-  const { modalType, elementId, apiCall, user, setBoard, handleClose } = props
-  let [modalTitle, modalBody, apiData, buttonText, danger] = []
+  const dispatch = useDispatch()
+  const { modalSwitch } = modalActions
 
-  switch (modalType) {
-    case 'create-column':
-      modalTitle = 'New Column'
-      buttonText = 'Create Column'
-      modalBody = ModalBodyCreateEditColumn('Enter Name')
-      break
-    case 'create-cell':
-      modalTitle = 'New Cell'
-      buttonText = 'Create Cell'
-      modalBody = ModalBodyCreateEditCell('*')
-      break
-    case 'edit-column':
-      modalTitle = 'Rename Column'
-      buttonText = 'Submit'
-      modalBody = ModalBodyCreateEditColumn('Enter New Name')
-      break
-    case 'edit-cell':
-      modalTitle = 'Edit Cell'
-      buttonText = 'Submit'
-      modalBody = ModalBodyCreateEditCell('')
-      break
-    case 'delete-column':
-      modalTitle = 'Delete The Column'
-      buttonText = 'Confirm'
-      modalBody = ModalBodyDelete(modalTitle)
-      danger = true
-      break
-    case 'delete-cell':
-      modalTitle = 'Delete The Cell'
-      buttonText = 'Confirm'
-      modalBody = ModalBodyDelete(modalTitle)
-      danger = true
-      break
-  }
+  const user = useSelector(state => state.auth.user)
+  const { modalType, elementID, show } = useSelector(state => state.modal)
+
+  const modalOptions = modalSetup(modalType)
+  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
 
   const handleSubmit = event => {
     event.preventDefault()
+
     apiData = {
       token: user.token,
-      elementId,
+      elementId: elementID,
       form: {}
     }
+
     if (event.currentTarget[0].id !== 'name') {
-      if (event.currentTarget[0].value) apiData.form.company = event.currentTarget[0].value
-      if (event.currentTarget[1]) apiData.form.position = event.currentTarget[1].value
-      if (event.currentTarget[2]) apiData.form.location = event.currentTarget[2].value
-      if (event.currentTarget[3]) apiData.form.contactName = event.currentTarget[3].value
-      if (event.currentTarget[4]) apiData.form.contactTitle = event.currentTarget[4].value
-      if (event.currentTarget[5]) apiData.form.contactEmail = event.currentTarget[5].value
-      if (event.currentTarget[6]) apiData.form.description = event.currentTarget[6].value
+      for (const field of event.currentTarget) {
+        if (field) {
+          apiData.form[field.id] = field.value
+        }
+      }
     } else {
       apiData.form.name = event.currentTarget[0].value
     }
-    const callApi = async () => {
-      await apiCall.call(apiData)
-      const response = await getBoard(user)
-      setBoard(response.data.board)
-      handleClose()
-    }
 
-    callApi()
+    dispatch(modalApiCall(apiCall, apiData))
   }
 
   return (
-    <Modal show={props.show} onHide={props.handleClose} centered>
+    <Modal
+      show={show}
+      onHide={() => dispatch(modalSwitch({ modalType: null, elementID: null }))}
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>{modalTitle}</Modal.Title>
       </Modal.Header>
@@ -85,7 +55,13 @@ const NewModal = props => {
           <Form.Group className='mb-3'>{modalBody}</Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button type='reset' variant='secondary' onClick={props.handleClose}>
+          <Button
+            type='reset'
+            variant='secondary'
+            onClick={() =>
+              dispatch(modalSwitch({ modalType: null, elementID: null }))
+            }
+          >
             Cancel
           </Button>
           <Button type='submit' variant={danger && 'danger'}>

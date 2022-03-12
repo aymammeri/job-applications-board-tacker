@@ -1,59 +1,40 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { changePassword } from '../../api/auth'
-import { changePasswordSuccess, changePasswordFailure } from '../AutoDismissAlert/messages'
+import { useDispatch, useSelector } from 'react-redux'
+import { changePasswordAction } from '../../Store/authSlice/authActions'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class ChangePassword extends Component {
-  constructor (props) {
-    super(props)
+const ChangePassword = props => {
+  const dispatch = useDispatch()
 
-    this.state = {
-      oldPassword: '',
-      newPassword: ''
-    }
+  const user = useSelector(state => state.auth.user)
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const credentials = { oldPassword, newPassword }
+
+  useEffect(() => {}, [credentials])
+
+  const handleChange = event => {
+    event.target.name === 'oldPassword'
+      ? setOldPassword(event.target.value)
+      : setNewPassword(event.target.value)
   }
 
-handleChange = (event) =>
-  this.setState({
-    [event.target.name]: event.target.value
-  })
+  const onChangePassword = event => {
+    event.preventDefault()
 
-onChangePassword = (event) => {
-  event.preventDefault()
-
-  const { msgAlert, history, user } = this.props
-
-  changePassword(this.state, user)
-    .then(() =>
-      msgAlert({
-        heading: 'Change Password Success',
-        message: changePasswordSuccess,
-        variant: 'success'
-      })
-    )
-    .then(() => history.push('/'))
-    .catch((error) => {
-      this.setState({ oldPassword: '', newPassword: '' })
-      msgAlert({
-        heading: 'Change Password Failed with error: ' + error.message,
-        message: changePasswordFailure,
-        variant: 'danger'
-      })
-    })
-}
-
-render () {
-  const { oldPassword, newPassword } = this.state
+    dispatch(changePasswordAction(user, credentials))
+    props.history.push('/')
+  }
 
   return (
     <div className='row'>
       <div className='col-sm-10 col-md-8 mx-auto mt-5'>
         <h3>Change Password</h3>
-        <Form onSubmit={this.onChangePassword}>
+        <Form onSubmit={onChangePassword}>
           <Form.Group controlId='oldPassword'>
             <Form.Label>Old password</Form.Label>
             <Form.Control
@@ -62,7 +43,7 @@ render () {
               value={oldPassword}
               type='password'
               placeholder='Old Password'
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group controlId='newPassword'>
@@ -73,15 +54,16 @@ render () {
               value={newPassword}
               type='password'
               placeholder='New Password'
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </Form.Group>
-          <Button variant='primary' type='submit'>Submit</Button>
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
         </Form>
       </div>
     </div>
   )
-}
 }
 
 export default withRouter(ChangePassword)

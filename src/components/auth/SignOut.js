@@ -1,28 +1,18 @@
-import { Component } from 'react'
+import React from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { signOut } from '../../api/auth'
-import { signOutSuccess } from '../AutoDismissAlert/messages'
+import { signOutAction } from '../../Store/authSlice/authActions'
 
-class SignOut extends Component {
-  componentDidMount () {
-    const { msgAlert, history, clearUser, user } = this.props
-
-    signOut(user)
-      .finally(() =>
-        msgAlert({
-          heading: 'Signed Out Successfully',
-          message: signOutSuccess,
-          variant: 'success'
-        })
-      )
-      .finally(() => history.push('/'))
-      .finally(() => clearUser())
-  }
-
-  render () {
-    return ''
-  }
+const SignOut = props => {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth.user)
+  dispatch(signOutAction(user))
+  return (
+    <>
+    </>
+  )
 }
 
 export default withRouter(SignOut)
