@@ -13,9 +13,9 @@ const ChangePassword = props => {
   const user = useSelector(state => state.auth.user)
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
-  const credentials = { oldPassword, newPassword }
+  const passwords = { oldPassword, newPassword }
 
-  useEffect(() => {}, [credentials])
+  useEffect(() => {}, [passwords])
 
   const handleChange = event => {
     event.target.name === 'oldPassword'
@@ -26,7 +26,7 @@ const ChangePassword = props => {
   const onChangePassword = event => {
     event.preventDefault()
 
-    dispatch(changePasswordAction(user, credentials))
+    dispatch(changePasswordAction(passwords, user))
     props.history.push('/')
   }
 
