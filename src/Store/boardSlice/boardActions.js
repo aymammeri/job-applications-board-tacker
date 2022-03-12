@@ -7,6 +7,6 @@ export const moveCells = data => {
   return async dispatch => {
     const token = store.getState().auth.user.token
     dispatch(boardActions.move({ ...data }))
-    await move({ token, ...data })
+    move({ token, ...data })
   }
 }
