@@ -10,7 +10,7 @@ import Column from '../Column/Column'
 
 import { DragDropContext } from 'react-beautiful-dnd'
 
-const Board = props => {
+const Board = () => {
   const dispatch = useDispatch()
   const setupModal = modalActions.setupModal
 

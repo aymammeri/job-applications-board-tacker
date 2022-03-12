@@ -9,7 +9,7 @@ import { Draggable } from 'react-beautiful-dnd'
 
 const Cell = props => {
   const dispatch = useDispatch()
-  const setupModal = modalActions.setupModal
+  const { modalSwitch } = modalActions
 
   const { id, index, company } = props
 
@@ -36,7 +36,7 @@ const Cell = props => {
               <Dropdown.Item
                 onClick={() => {
                   dispatch(
-                    setupModal({ modalType: 'edit-cell', elementID: id })
+                    modalSwitch({ modalType: 'edit-cell', elementID: id })
                   )
                 }}
               >
@@ -45,7 +45,7 @@ const Cell = props => {
               <Dropdown.Item
                 onClick={() => {
                   dispatch(
-                    setupModal({ modalType: 'delete-cell', elementID: id })
+                    modalSwitch({ modalType: 'delete-cell', elementID: id })
                   )
                 }}
               >
