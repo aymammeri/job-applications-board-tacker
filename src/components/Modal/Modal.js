@@ -4,6 +4,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { modalActions } from '../../Store/modalSlice/modalReducer'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { modalApiCall } from '../../Store/modalSlice/modalActions'
 
 import { Button, Form, Modal } from 'react-bootstrap'
@@ -21,6 +22,9 @@ const NewModal = props => {
   let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
 =======
 import { modalApiCall } from '../../Store/modalSlice/modalThunk'
+=======
+import { modalApiCall } from '../../Store/modalSlice/modalActions'
+>>>>>>> 9f7c674 (Variable rename)
 
 import { Button, Form, Modal } from 'react-bootstrap'
 
