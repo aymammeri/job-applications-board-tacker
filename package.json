@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "homepage": "http://aymammeri.github.io/job-applications-board-tracker",
-=======
-  "homepage": "",
->>>>>>> dev
   "name": "job-applications-board-tracker",
   "version": "0.1.0",
   "private": true,

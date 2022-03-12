@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { signUp } from '../../api/auth'
-import { signUpSuccess, signUpFailure } from '../AutoDismissAlert/messages'
 import { useDispatch } from 'react-redux'
 import { signUpAction } from '../../Store/authSlice/authActions'
 

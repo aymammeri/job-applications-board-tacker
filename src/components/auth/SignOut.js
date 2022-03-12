@@ -1,8 +1,7 @@
 import React from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import { useDispatch, useSelector } from 'react-redux'
 import { signOutAction } from '../../Store/authSlice/authActions'
 
 const SignOut = props => {
