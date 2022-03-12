@@ -34,7 +34,7 @@ const Board = () => {
           variant='outline-link'
           className='ms-auto p-2'
           onClick={() => {
-            dispatch(setupModal({ modalType: 'create-column', elementID: id }))
+            dispatch(setupModal({ modalType: 'create-column', parentId: id }))
           }}
         >
           New Column

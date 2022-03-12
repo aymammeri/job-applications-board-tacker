@@ -8,7 +8,7 @@ export const modalApiCall = (crud, data) => {
       await crud(data)
       const response = await getBoard(data.token)
       dispatch(boardActions.setBoard(response.data.board))
-      dispatch(modalActions.setupModal({ modalType: null, elementID: null }))
+      dispatch(modalActions.setupModal({ modalType: null, parentId: null }))
     } catch (error) {
       console.error(error)
     }
