@@ -50,7 +50,7 @@ export const move = data => {
     headers: {
       Authorization: `Bearer ${data.token}`
     },
-    data: { ...data }
+    data: { source: data.source, destination: data.destination }
   })
 }
 

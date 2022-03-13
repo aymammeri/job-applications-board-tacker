@@ -17,7 +17,8 @@ const NewModal = props => {
   const { modalType, elementId, show } = useSelector(state => state.modal)
 
   const modalOptions = modalSetup(modalType)
-  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } = modalOptions
+  let { modalTitle, modalBody, apiCall, apiData, buttonText, danger } =
+    modalOptions
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -56,7 +57,6 @@ const NewModal = props => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            type='reset'
             variant='secondary'
             onClick={() =>
               dispatch(modalSwitch({ modalType: null, elementId: null }))

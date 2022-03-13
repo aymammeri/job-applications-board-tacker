@@ -10,7 +10,7 @@ import { Droppable } from 'react-beautiful-dnd'
 
 const Column = props => {
   const dispatch = useDispatch()
-  const setupModal = modalActions.setupModal
+  const { modalSwitch } = modalActions
 
   const { id, name, cells } = props
 
@@ -32,7 +32,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'edit-column', elementId: id })
+                      modalSwitch({ modalType: 'edit-column', elementId: id })
                     )
                   }}
                 >
@@ -41,7 +41,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'delete-column', elementId: id })
+                      modalSwitch({ modalType: 'delete-column', elementId: id })
                     )
                   }}
                 >
@@ -51,7 +51,7 @@ const Column = props => {
                 <Dropdown.Item
                   onClick={() => {
                     dispatch(
-                      setupModal({ modalType: 'create-cell', elementId: id })
+                      modalSwitch({ modalType: 'create-cell', elementId: id })
                     )
                   }}
                 >
