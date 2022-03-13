@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/job-applications-board-tracker/static/css/main.4dd5e33d.chunk.css",
+    "main.js": "/job-applications-board-tracker/static/js/main.78789084.chunk.js",
+    "main.js.map": "/job-applications-board-tracker/static/js/main.78789084.chunk.js.map",
+    "runtime-main.js": "/job-applications-board-tracker/static/js/runtime-main.db8a103d.js",
+    "runtime-main.js.map": "/job-applications-board-tracker/static/js/runtime-main.db8a103d.js.map",
+    "static/css/2.f4c56af9.chunk.css": "/job-applications-board-tracker/static/css/2.f4c56af9.chunk.css",
+    "static/js/2.bca64696.chunk.js": "/job-applications-board-tracker/static/js/2.bca64696.chunk.js",
+    "static/js/2.bca64696.chunk.js.map": "/job-applications-board-tracker/static/js/2.bca64696.chunk.js.map",
+    "index.html": "/job-applications-board-tracker/index.html",
+    "static/css/2.f4c56af9.chunk.css.map": "/job-applications-board-tracker/static/css/2.f4c56af9.chunk.css.map",
+    "static/css/main.4dd5e33d.chunk.css.map": "/job-applications-board-tracker/static/css/main.4dd5e33d.chunk.css.map",
+    "static/js/2.bca64696.chunk.js.LICENSE.txt": "/job-applications-board-tracker/static/js/2.bca64696.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.db8a103d.js",
+    "static/css/2.f4c56af9.chunk.css",
+    "static/js/2.bca64696.chunk.js",
+    "static/css/main.4dd5e33d.chunk.css",
+    "static/js/main.78789084.chunk.js"
+  ]
+}
