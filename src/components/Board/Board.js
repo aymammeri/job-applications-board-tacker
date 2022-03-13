@@ -12,7 +12,7 @@ import { DragDropContext } from 'react-beautiful-dnd'
 
 const Board = () => {
   const dispatch = useDispatch()
-  const setupModal = modalActions.setupModal
+  const { modalSwitch } = modalActions
 
   const board = useSelector(state => state.board.board)
   const id = board._id
@@ -34,7 +34,7 @@ const Board = () => {
           variant='outline-link'
           className='ms-auto p-2'
           onClick={() => {
-            dispatch(setupModal({ modalType: 'create-column', elementId: id }))
+            dispatch(modalSwitch({ modalType: 'create-column', elementId: id }))
           }}
         >
           New Column
