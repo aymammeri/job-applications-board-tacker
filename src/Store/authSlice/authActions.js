@@ -1,5 +1,6 @@
 import * as authApi from '../../api/auth'
 
+import store from '../rootStore'
 import { userAuthActions } from './authReducer'
 import { boardActions } from '../boardSlice/boardReducer'
 
@@ -38,24 +39,26 @@ export const signInAction = credentials => {
   }
 }
 
-export const signOutAction = user => {
+export const signOutAction = () => {
   return dispatch => {
     const signOut = async () => {
-      await authApi.signOut(user)
+      const token = store.getState().auth.user.token
+      await authApi.signOut(token)
       dispatch(userAuthActions.clearUser())
     }
     try {
-      signOut(user)
+      signOut()
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export const changePasswordAction = (passwords, user) => {
+export const changePasswordAction = (passwords) => {
   return () => {
     const changePass = async () => {
-      authApi.changePassword(passwords, user)
+      const token = store.getState().auth.user.token
+      authApi.changePassword(passwords, token)
     }
     try {
       changePass()

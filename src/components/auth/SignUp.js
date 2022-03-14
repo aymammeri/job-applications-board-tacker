@@ -9,15 +9,18 @@ import Button from 'react-bootstrap/Button'
 
 const SignUp = props => {
   const dispatch = useDispatch()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const credentials = { email, password, passwordConfirmation }
 
   const handleChange = event => {
-    event.target.name === 'email' && setEmail(event.target.value)
-    event.target.name === 'password' && setPassword(event.target.value)
-    event.target.name === 'passwordConfirmation' && setPasswordConfirmation(event.target.value)
+    event.target.name === 'email'
+      ? setEmail(event.target.value)
+      : event.target.name === 'password'
+        ? setPassword(event.target.value)
+        : setPasswordConfirmation(event.target.value)
   }
 
   const onSignUp = event => {

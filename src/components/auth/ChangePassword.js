@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changePasswordAction } from '../../Store/authSlice/authActions'
 
 import Form from 'react-bootstrap/Form'
@@ -10,7 +10,6 @@ import Button from 'react-bootstrap/Button'
 const ChangePassword = props => {
   const dispatch = useDispatch()
 
-  const user = useSelector(state => state.auth.user)
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const passwords = { oldPassword, newPassword }
@@ -24,7 +23,7 @@ const ChangePassword = props => {
   const onChangePassword = event => {
     event.preventDefault()
 
-    dispatch(changePasswordAction(passwords, user))
+    dispatch(changePasswordAction(passwords))
     props.history.push('/')
   }
 

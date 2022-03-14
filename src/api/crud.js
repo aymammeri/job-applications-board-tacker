@@ -42,7 +42,7 @@ export const getBoard = token => {
   })
 }
 
-// UPDATE MOVE CELLS
+// UPDATE REORDER/MOVE CELLS
 export const move = data => {
   return axios({
     url: apiUrl + '/column/',
@@ -95,7 +95,7 @@ export const deleteColumn = data => {
   })
 }
 
-// DELETE COLUMN
+// DELETE CELL
 export const deleteCell = data => {
   return axios({
     url: apiUrl + '/cell/' + data.elementId,
