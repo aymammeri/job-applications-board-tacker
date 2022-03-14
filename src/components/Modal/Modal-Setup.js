@@ -5,7 +5,7 @@ import ModalBodyCreateEditCell from './Modal-Body-Cell-EditCreate'
 import ModalBodyDelete from './Modal-Body-Delete'
 
 const setupModal = modalType => {
-  let [modalTitle, modalBody, apiCall, buttonText, danger] = []
+  let modalTitle, modalBody, apiCall, buttonText, danger
 
   switch (modalType) {
   case 'create-column':
