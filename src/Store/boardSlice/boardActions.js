@@ -1,9 +1,9 @@
 import store from '../rootStore'
-
-import { toast } from 'react-toastify'
+import { boardActions } from './boardReducer'
 
 import { move } from '../../api/crud'
-import { boardActions } from './boardReducer'
+
+import { toast } from 'react-toastify'
 
 export const moveCells = data => {
   return async dispatch => {
