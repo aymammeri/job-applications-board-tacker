@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,8 +14,6 @@ const ChangePassword = props => {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const passwords = { oldPassword, newPassword }
-
-  useEffect(() => {}, [passwords])
 
   const handleChange = event => {
     event.target.name === 'oldPassword'

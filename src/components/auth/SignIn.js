@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
@@ -13,18 +13,16 @@ const SignIn = props => {
   const [password, setPassword] = useState('')
   const credentials = { email, password }
 
-  useEffect(() => {}, [credentials])
-
   const handleChange = event => {
     event.target.name === 'email'
       ? setEmail(event.target.value)
       : setPassword(event.target.value)
   }
 
-  const onSignIn = async event => {
+  const onSignIn = event => {
     event.preventDefault()
 
-    await dispatch(signInAction(credentials))
+    dispatch(signInAction(credentials))
     props.history.push('/')
   }
 

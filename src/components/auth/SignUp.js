@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
@@ -14,8 +14,6 @@ const SignUp = props => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const credentials = { email, password, passwordConfirmation }
 
-  useEffect(() => {}, [credentials])
-
   const handleChange = event => {
     event.target.name === 'email' && setEmail(event.target.value)
     event.target.name === 'password' && setPassword(event.target.value)
@@ -26,7 +24,7 @@ const SignUp = props => {
     event.preventDefault()
 
     dispatch(signUpAction(credentials))
-    props.history.push('/')
+    props.history.push('/sign-in')
   }
 
   return (
