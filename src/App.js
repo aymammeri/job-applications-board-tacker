@@ -14,7 +14,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Board from './components/Board/Board'
-import NewModal from './components/Modal/Modal'
+import Modal from './components/Modal/Modal'
 
 const App = () => {
   const user = useSelector(state => state.auth.user)
@@ -39,7 +39,7 @@ const App = () => {
           exact
           path='/'
           user={user}
-          render={() => <Board />}
+          component={Board}
         />
       </main>
       <ToastContainer
@@ -53,7 +53,7 @@ const App = () => {
         draggable
         pauseOnHover={false}
       />
-      <NewModal user={user} />
+      <Modal user={user} />
     </Fragment>
   )
 }

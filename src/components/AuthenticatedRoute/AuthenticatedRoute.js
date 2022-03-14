@@ -9,15 +9,23 @@ const AuthenticatedRoute = ({
   component: Component,
   render,
   ...rest
-}) => {
+}) => (
   // if props include a `user` object and a `render` then create route with `render`
-  if (user && render) {
-    return <Route {...rest} render={render} />
-    // if props include a `user` object but no `render` then create route with `Component`
-    // if props do not include a `user` object then redirect to home
-  } else {
-    return <Route render={() => <Redirect to='/' />} />
-  }
-}
+  // if props include a `user` object but no `render` then create route with `Component`
+  // if props do not include a `user` object then redirect to home
+  user
+    ? (
+      render
+        ? (
+          <Route {...rest} render={render} />
+        )
+        : (
+          <Route {...rest} component={Component} />
+        )
+    )
+    : (
+      <Route render={() => <Redirect to='/sign-in' />} />
+    )
+)
 
 export default AuthenticatedRoute
